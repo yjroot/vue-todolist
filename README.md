@@ -1,5 +1,7 @@
 # vue-todolist
 
+This project was published at https://inourtodolist.netlify.app/
+
 ## Project setup
 ```
 yarn install
