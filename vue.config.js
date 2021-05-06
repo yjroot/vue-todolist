@@ -1,4 +1,4 @@
 module.exports = {
-    publicPath: '/vue-toodlist',
+    publicPath: '/vue-todolist',
     outputDir: 'docs'
 }
