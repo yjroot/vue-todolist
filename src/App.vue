@@ -28,6 +28,10 @@ export default {
                     );
                 }
             }
+            
+            this.todoItems.sort(function (a, b) {
+              return Date.parse(a.date) - Date.parse(b.date);
+            });
         }
     },
     methods: {
