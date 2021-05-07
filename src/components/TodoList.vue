@@ -1,17 +1,21 @@
 <template lang="">
     <div class="TodoList"  v-if="propsdata.length" >
-        <div class="TodoListItem" v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.date">
+        <div class="TodoListItem" v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.time">
             <div class="leftBox">
                 <input
                     type="checkbox"
                     v-bind:id="todoItem.item"
                     v-bind:checked="todoItem.completed === true"
-                    v-on:change="toggleComplete(todoItem)"/>
-                <div class="TodoListItemLabel"  v-on:click="completeTodoItem(todoItem)">
-                    <label > {{todoItem.item}} </label>
+                    v-on:change="completeTodoItem(todoItem)"/>
+                <div 
+                    class="TodoListItemLabel"  
+                    v-on:click="completeTodoItem(todoItem)">
+                    <label> 
+                        {{todoItem.item}}
+                    </label>
                 </div>
-
             </div>
+            
             <div>
                 <button 
                     id="todo-del-button"
@@ -22,7 +26,6 @@
 </template>
 <script>
 export default {
-    name: "TodoList",
     props: ["propsdata"],
     methods: {
         completeTodoItem(todoItem) {

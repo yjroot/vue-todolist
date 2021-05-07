@@ -21,6 +21,7 @@ export default {
     },
     created() {
         if (localStorage.length > 0) {
+            // Push to-do items in local storage to todoItems array.
             for(let i = 0;i < localStorage.length; i++) {
                 if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
                     this.todoItems.push(
@@ -29,29 +30,36 @@ export default {
                 }
             }
             
+            // Sort to-do items by time (oldest to latest).
             this.todoItems.sort(function (a, b) {
-              return Date.parse(a.date) - Date.parse(b.date);
+              return a.time - b.time;
             });
         }
     },
     methods: {
         addItem(todoItem) {
-            console.log(todoItem);
+            // Create to-do item
+            // key : time
+            // value : {item, date, time, completed}
             var date = new Date();
             var value = {
                 item: todoItem,
                 date: date.toString(),
+                time: date.getTime(),
                 completed: false
             }
-            localStorage.setItem(date.toString(), JSON.stringify(value));
+            // console.log(date.getTime().toString(), value);
+            localStorage.setItem(date.getTime().toString(), JSON.stringify(value));
             this.todoItems.push(value);
         },
         completeItem(todoItem) {
+            // Reverse the completed property
             todoItem.completed = !todoItem.completed;
-            localStorage.setItem(todoItem.date, JSON.stringify(todoItem));
+            localStorage.setItem(todoItem.time, JSON.stringify(todoItem));
         },
         deleteItem(todoItem, index) {
-            localStorage.removeItem(todoItem.date);
+            // Delete to-do item
+            localStorage.removeItem(todoItem.time);
             this.todoItems.splice(index, 1);
         }
     },
