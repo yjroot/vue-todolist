@@ -3,18 +3,13 @@
         <footer class="TodoFooter">
             <button 
                 id="todo-clear-button"
-                v-on:click="clearTodoItem">Clear</button>
+                @click="$emit('clearItem')">Clear</button>
         </footer>
     </div>
 </template>
 <script>
 export default {
     name: "TodoFooter",
-    methods: {
-        clearTodoItem() {
-                this.$emit("clearItem");
-        }
-    }
 }
 </script>
 <style lang="scss">

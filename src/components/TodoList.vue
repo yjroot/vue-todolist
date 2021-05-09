@@ -1,6 +1,6 @@
 <template lang="">
     <main class="TodoList">
-        <div class="TodoListItem" v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.time">
+        <div class="TodoListItem" v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.time">
             <div class="leftBox">
                 <input
                     type="checkbox"
@@ -26,7 +26,7 @@
 </template>
 <script>
 export default {
-    props: ["propsdata"],
+    props: ["todoItems"],
     methods: {
         completeTodoItem(todoItem) {
             this.$emit("completeItem", todoItem);

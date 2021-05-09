@@ -7,10 +7,10 @@
                 type="text" 
                 placeholder="Enter" 
                 v-model="newTodoItem"
-                v-on:keyup.enter="addTodoItem">
+                @keyup.enter="addTodoItem">
             <button 
                 id="todo-add-button"
-                v-on:click="addTodoItem">Add</button>
+                @click="addTodoItem">Add</button>
         </div>
     </header>
 </template>

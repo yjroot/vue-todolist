@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <TodoHeader 
-      v-on:addItem="addItem" />
+      @addItem="addItem" />
     <TodoList 
-      v-bind:propsdata="todoItems" 
-      v-on:deleteItem="deleteItem"
-      v-on:completeItem="completeItem"/>
+      :todoItems="todoItems" 
+      @deleteItem="deleteItem"
+      @completeItem="completeItem"/>
     <TodoFooter 
-      v-on:clearItem="clearItem"/>
+      @clearItem="clearItem"/>
   </div>
 </template>
 
@@ -16,7 +16,6 @@ import TodoHeader from './components/TodoHeader.vue'
 import TodoFooter from './components/TodoFooter.vue'
 import TodoList from './components/TodoList.vue'
 
-
 export default {
     data() {
         return {
@@ -24,20 +23,13 @@ export default {
         };
     },
     created() {
-        if (localStorage.length > 0) {
-            // Push to-do items in local storage to todoItems array.
-            for(let i = 0;i < localStorage.length; i++) {
-                if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-                    this.todoItems.push(
-                        JSON.parse(localStorage.getItem(localStorage.key(i)))
-                    );
-                }
+        const todoItemsJson = localStorage.getItem('todoItems')
+        if (todoItemsJson) {
+            try {
+              this.todoItems = JSON.parse(todoItemsJson)
+            } catch (e) {
+              alert('error: localStorage')
             }
-            
-            // Sort to-do items by time (oldest to latest).
-            this.todoItems.sort(function (a, b) {
-              return a.time - b.time;
-            });
         }
     },
     methods: {
@@ -52,23 +44,25 @@ export default {
                 time: date.getTime(),
                 completed: false
             }
-            // console.log(date.getTime().toString(), value);
-            localStorage.setItem(date.getTime().toString(), JSON.stringify(value));
             this.todoItems.push(value);
+            this.save()
         },
         completeItem(todoItem) {
             // Reverse the completed property
             todoItem.completed = !todoItem.completed;
-            localStorage.setItem(todoItem.time, JSON.stringify(todoItem));
+            this.save()
         },
         deleteItem(todoItem, index) {
             // Delete to-do item
-            localStorage.removeItem(todoItem.time);
             this.todoItems.splice(index, 1);
+            this.save()
         },
         clearItem() {
-            localStorage.clear();
             this.todoItems = [];
+            this.save()
+        },
+        save() {
+            localStorage.setItem('todoItems', JSON.stringify(this.todoItems));
         }
     },
     name: 'App',
