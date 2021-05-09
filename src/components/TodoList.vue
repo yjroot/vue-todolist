@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="TodoList"  v-if="propsdata.length" >
+    <main class="TodoList">
         <div class="TodoListItem" v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.time">
             <div class="leftBox">
                 <input
@@ -22,7 +22,7 @@
                     v-on:click="deleteTodoItem(todoItem, index)">Delete</button>
             </div>
         </div>
-    </div>
+    </main>
 </template>
 <script>
 export default {
@@ -39,13 +39,15 @@ export default {
 </script>
 <style lang="scss">
     .TodoList {
+        width: 100%;
         max-width: 960px;
+        padding-bottom: 72px;
+        
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        margin: 0 auto;
     }
     .TodoListItem {
         width: 100%;
@@ -53,7 +55,6 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-
         background-color: #D9AFD9;
     }
     .leftBox {

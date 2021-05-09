@@ -6,12 +6,16 @@
       v-bind:propsdata="todoItems" 
       v-on:deleteItem="deleteItem"
       v-on:completeItem="completeItem"/>
+    <TodoFooter 
+      v-on:clearItem="clearItem"/>
   </div>
 </template>
 
 <script>
 import TodoHeader from './components/TodoHeader.vue'
+import TodoFooter from './components/TodoFooter.vue'
 import TodoList from './components/TodoList.vue'
+
 
 export default {
     data() {
@@ -61,24 +65,35 @@ export default {
             // Delete to-do item
             localStorage.removeItem(todoItem.time);
             this.todoItems.splice(index, 1);
+        },
+        clearItem() {
+            localStorage.clear();
+            this.todoItems = [];
         }
     },
     name: 'App',
     components: {
       TodoHeader,
-      TodoList
+      TodoList,
+      TodoFooter,
     },
 }
 </script>
 
 <style lang="scss">
 #app {
-  min-height: 100%;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    min-height: 100%;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 input, button {
     font-size: 16px;

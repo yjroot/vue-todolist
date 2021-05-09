@@ -37,8 +37,10 @@ export default {
 </script>
 <style lang="scss">
     .TodoHeader {
+        width: 100%;
+        height: 120px;
         max-width: 960px;
-        min-height: 72px;
+        
         display: flex;
         flex-direction: column;
         justify-content: center;
